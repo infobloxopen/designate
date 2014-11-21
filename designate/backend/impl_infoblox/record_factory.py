@@ -28,7 +28,7 @@ LOG = logging.getLogger(__name__)
 
 class RecordFactory(object):
     @staticmethod
-    def factory(recordset, infoblox, tenant_name):
+    def get_record(recordset, infoblox, tenant_name):
         if recordset.type == "A":
             return a.ARecord(infoblox, tenant_name)
         if recordset.type == "CNAME":

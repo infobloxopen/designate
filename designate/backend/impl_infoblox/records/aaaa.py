@@ -23,7 +23,7 @@ LOG = logging.getLogger(__name__)
 
 class AAAARecord(base.DNSRecord):
 
-    def create(self, recordset, record=None):
+    def create(self, recordset, record):
         attrs = self._create_ttl_attr(recordset)
 
         payload = {
@@ -38,12 +38,6 @@ class AAAARecord(base.DNSRecord):
 
         self.infoblox._create_infoblox_object('record:aaaa', payload, attrs,
                                               check_if_exists=True)
-
-    def update(self, recordset, record=None):
-        if record:
-            self._update_infoblox_record(recordset, record)
-        else:
-            self._update_infoblox_recordset(recordset)
 
     def _update_infoblox_record(self, recordset, record):
         ip = record.to_primitive()
@@ -61,6 +55,9 @@ class AAAARecord(base.DNSRecord):
     def _update_infoblox_recordset(self, recordset):
         rs = recordset.to_primitive()
         for record in recordset.records:
+            if not record:
+                continue
+
             update = {
                 'name': rs['designate_object.data']['name'][0:-1]
             }
