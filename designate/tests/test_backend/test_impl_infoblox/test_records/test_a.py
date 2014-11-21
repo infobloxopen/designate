@@ -26,7 +26,6 @@ from designate.tests.test_backend import BackendTestMixin
 from designate import utils
 
 
-
 class ARecordTestCase(tests.TestCase, BackendTestMixin):
     def create_record_primitive(self, ip):
         def to_primitive():
@@ -79,12 +78,12 @@ class ARecordTestCase(tests.TestCase, BackendTestMixin):
 
     def setUp(self):
         super(ARecordTestCase, self).setUp()
-        self.infonfoblox = MagicMock()
-        self.infonfoblox._create_infoblox_object = MagicMock()
-        self.infonfoblox._delete_infoblox_object = MagicMock()
-        self.infonfoblox._update_infoblox_object = MagicMock()
+        self.infoblox = MagicMock()
+        self.infoblox._create_infoblox_object = MagicMock()
+        self.infoblox._delete_infoblox_object = MagicMock()
+        self.infoblox._update_infoblox_object = MagicMock()
 
-        self.arecord = a.ARecord(self.infonfoblox)
+        self.arecord = a.ARecord(self.infoblox, 'default')
 
     def test_create_record(self):
         domain = self.get_domain_fixture()
@@ -92,7 +91,7 @@ class ARecordTestCase(tests.TestCase, BackendTestMixin):
         record = self.get_record_fixture("A")
 
         self.arecord.create(recordset, record)
-        self.infonfoblox._create_infoblox_object.assert_called_once_with(
+        self.infoblox._create_infoblox_object.assert_called_once_with(
             'record:a',
             {
                 'comment': ANY,
@@ -111,7 +110,7 @@ class ARecordTestCase(tests.TestCase, BackendTestMixin):
 
         self.arecord.create(recordset, record)
         self.arecord.update(recordset, record)
-        self.infonfoblox._update_infoblox_object.assert_called_once_with(
+        self.infoblox._update_infoblox_object.assert_called_once_with(
             'record:a',
             {
                 'comment': ANY,
@@ -129,7 +128,7 @@ class ARecordTestCase(tests.TestCase, BackendTestMixin):
 
         self.arecord.create(recordset, record)
         self.arecord.delete(recordset, record)
-        self.infonfoblox._delete_infoblox_object.assert_called_once_with(
+        self.infoblox._delete_infoblox_object.assert_called_once_with(
             'record:a',
             {
                 'comment': ANY,

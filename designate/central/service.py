@@ -760,6 +760,7 @@ class Service(service.RPCService, service.Service):
     @notification('dns.domain.create')
     @synchronized_domain(new_domain=True)
     def create_domain(self, context, domain):
+        LOG.error(self.backend)
         # TODO(kiall): Refactor this method into *MUCH* smaller chunks.
         # Default to creating in the current users tenant
         if domain.tenant_id is None:
