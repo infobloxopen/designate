@@ -40,21 +40,21 @@ class InfobloxBackend(base.Backend):
     def create_record(self, context, domain, recordset, record):
         LOG.info(_LI('Create Record %(domain)r / %(recordset)r / %(record)r') %
                  {'domain': domain, 'recordset': recordset, 'record': record})
-        record_manipulator = record_factory.RecordFactory.factory(
+        record_manipulator = record_factory.RecordFactory.get_record(
             recordset, self.infoblox, context.tenant)
         record_manipulator.create(recordset, record)
 
     def update_record(self, context, domain, recordset, record):
         LOG.info(_LI('Update Record %(domain)r / %(recordset)r / %(record)r') %
                  {'domain': domain, 'recordset': recordset, 'record': record})
-        record_manipulator = record_factory.RecordFactory.factory(
+        record_manipulator = record_factory.RecordFactory.get_record(
             recordset, self.infoblox, context.tenant)
         record_manipulator.update(recordset, record)
 
     def delete_record(self, context, domain, recordset, record):
         LOG.info(_LI('Delete Record %(domain)r / %(recordset)r / %(record)r') %
                  {'domain': domain, 'recordset': recordset, 'record': record})
-        record_manipulator = record_factory.RecordFactory.factory(
+        record_manipulator = record_factory.RecordFactory.get_record(
             recordset, self.infoblox, context.tenant)
         record_manipulator.delete(recordset, record)
 
@@ -117,7 +117,7 @@ class InfobloxBackend(base.Backend):
         LOG.info(_LI('Update RecordSet %(domain)r / %(recordset)r') %
                  {'domain': domain, 'recordset': recordset})
 
-        record_manipulator = record_factory.RecordFactory.factory(
+        record_manipulator = record_factory.RecordFactory.get_record(
             recordset, self.infoblox, context.tenant)
         record_manipulator.update(recordset)
 

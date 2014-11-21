@@ -25,7 +25,7 @@ from designate import utils
 
 
 class InfobloxBackendTestCase(tests.TestCase, BackendTestMixin):
-    def create_record_primitive(self, ip):
+    def create_record_primitiv_fixture(self, ip):
         def to_primitive():
             return {
                 'designate_object.data': {
@@ -57,7 +57,8 @@ class InfobloxBackendTestCase(tests.TestCase, BackendTestMixin):
             values={
                 'id': utils.generate_uuid(),
                 'ttl': 123456,
-                'to_primitive': self.create_record_primitive('172.25.1.2'),
+                'to_primitive': self.create_record_primitiv_fixture(
+                    '172.25.1.2'),
                 'obj_get_changes': obj_get_changes
             }
         )
@@ -69,7 +70,8 @@ class InfobloxBackendTestCase(tests.TestCase, BackendTestMixin):
             recordset_type,
             values={
                 'id': utils.generate_uuid(),
-                'to_primitive': self.create_record_primitive('172.25.1.1')
+                'to_primitive': self.create_record_primitiv_fixture(
+                    '172.25.1.1')
             }
         )
         return collections.namedtuple('Record', values)(**values)

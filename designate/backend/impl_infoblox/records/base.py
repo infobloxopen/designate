@@ -59,11 +59,9 @@ class DNSRecord():
     def delete(self, recordset, record=None):
         raise Exception('Non implemented')
 
-    @abstractmethod
     def _update_infoblox_record(self, recordset, record):
         pass
 
-    @abstractmethod
     def _update_infoblox_recordset(self, recordset, record):
         pass
 

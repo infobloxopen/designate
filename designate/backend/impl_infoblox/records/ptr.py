@@ -30,7 +30,7 @@ class PTRRecord(base.DNSRecord):
         octets.reverse()
         return ".".join(octets) + '.in-addr.arpa'
 
-    def create(self, recordset, record=None):
+    def create(self, recordset, record):
         ip = record.to_primitive()
 
         attrs = {}
