@@ -19,7 +19,6 @@ import gettext
 
 from designate.backend.impl_infoblox.config import cfg
 from designate.backend.impl_infoblox import exceptions as exc
-from designate.i18n import _LI
 
 _ = gettext.gettext
 
@@ -85,7 +84,8 @@ class InfobloxObjectManipulator(object):
                     net_view_name=tenant,
                     dns_view_name=tenant)
             except Exception as e:
-                LOG.warning(_LI("Issue happens during views creating: %s" % e))
+                LOG.warning(
+                    _("Issue happens during views creating: %s"), e)
 
             return tenant
         else:

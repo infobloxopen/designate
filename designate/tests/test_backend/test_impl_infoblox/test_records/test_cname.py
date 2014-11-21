@@ -26,7 +26,6 @@ from designate.tests.test_backend import BackendTestMixin
 from designate import utils
 
 
-
 class CNameRecordTestCase(tests.TestCase, BackendTestMixin):
     def create_record_primitive(self, ip):
         def to_primitive():
@@ -78,12 +77,12 @@ class CNameRecordTestCase(tests.TestCase, BackendTestMixin):
 
     def setUp(self):
         super(CNameRecordTestCase, self).setUp()
-        self.infonfoblox = MagicMock()
-        self.infonfoblox._create_infoblox_object = MagicMock()
-        self.infonfoblox._delete_infoblox_object = MagicMock()
-        self.infonfoblox._update_infoblox_object = MagicMock()
+        self.infoblox = MagicMock()
+        self.infoblox._create_infoblox_object = MagicMock()
+        self.infoblox._delete_infoblox_object = MagicMock()
+        self.infoblox._update_infoblox_object = MagicMock()
 
-        self.cnamerecord = cname.CNameRecord(self.infonfoblox)
+        self.cnamerecord = cname.CNameRecord(self.infoblox, 'default')
 
     def test_create_record(self):
         domain = self.get_domain_fixture()
@@ -91,7 +90,7 @@ class CNameRecordTestCase(tests.TestCase, BackendTestMixin):
         record = self.get_record_fixture("A")
 
         self.cnamerecord.create(recordset, record)
-        self.infonfoblox._create_infoblox_object.assert_called_once_with(
+        self.infoblox._create_infoblox_object.assert_called_once_with(
             'record:cname',
             {
                 'comment': ANY,
@@ -110,7 +109,7 @@ class CNameRecordTestCase(tests.TestCase, BackendTestMixin):
 
         self.cnamerecord.create(recordset, record)
         self.cnamerecord.update(recordset, record)
-        self.infonfoblox._update_infoblox_object.assert_called_once_with(
+        self.infoblox._update_infoblox_object.assert_called_once_with(
             'record:cname',
             {
                 'comment': ANY,
@@ -128,7 +127,7 @@ class CNameRecordTestCase(tests.TestCase, BackendTestMixin):
 
         self.cnamerecord.create(recordset, record)
         self.cnamerecord.delete(recordset, record)
-        self.infonfoblox._delete_infoblox_object.assert_called_once_with(
+        self.infoblox._delete_infoblox_object.assert_called_once_with(
             'record:cname',
             {
                 'comment': ANY,

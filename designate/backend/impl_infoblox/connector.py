@@ -53,8 +53,10 @@ class Infoblox(object):
 
         self.session = requests.Session()
         adapter = requests.adapters.HTTPAdapter(
-            pool_connections=cfg.CONF['backend:infoblox'].infoblox_http_pool_connections,
-            pool_maxsize=cfg.CONF['backend:infoblox'].infoblox_http_pool_maxsize)
+            pool_connections=cfg.CONF[
+                'backend:infoblox'].infoblox_http_pool_connections,
+            pool_maxsize=cfg.CONF[
+                'backend:infoblox'].infoblox_http_pool_maxsize)
         self.session.mount('http://', adapter)
         self.session.mount('https://', adapter)
         self.session.auth = (self.username, self.password)
