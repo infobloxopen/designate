@@ -816,7 +816,6 @@ class Service(service.RPCService):
     @synchronized_domain(new_domain=True)
     @transaction
     def create_domain(self, context, domain):
-        LOG.error(self.backend)
         # TODO(kiall): Refactor this method into *MUCH* smaller chunks.
 
         # Default to creating in the current users tenant
