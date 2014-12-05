@@ -1,6 +1,4 @@
-# Copyright 2014 Mirantis
-#
-# Author: Nikolay Yakovlev <nyakovlev@mirantis.com>
+# Copyright 2014 Infoblox
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -46,6 +44,7 @@ class CNameRecord(base.DNSRecord):
 
     def _update_infoblox_record(self, recordset, record):
         ip = record.to_primitive()
+
         update = {
             'canonical': ip['designate_object.data']['data'][0:-1]
         }

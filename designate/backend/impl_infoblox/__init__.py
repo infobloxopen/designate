@@ -1,6 +1,4 @@
-# Copyright 2014 Mirantis
-#
-# Author: Nikolay Yakovlev <nyakovlev@mirantis.com>
+# Copyright 2014 Infoblox
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -78,7 +76,6 @@ class InfobloxBackend(base.Backend):
         LOG.info(_LI('Delete Domain %r') % domain)
         self.infoblox.delete_zone_auth(domain['name'][0:-1])
 
-    # TODO(nyakovlev) Howto call this place?
     def create_tsigkey(self, context, tsigkey):
         LOG.info(_LI('Create TSIG Key %r') % tsigkey)
         self.infoblox.create_tsig(tsigkey['name'], tsigkey['algorithm'],
