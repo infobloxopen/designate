@@ -1,6 +1,4 @@
-# Copyright (C) 2014 Mirantis
-#
-# Author: Nikolay Yakovlev <nyakovlev@mirantis.com>
+# Copyright 2014 Infoblox
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -13,7 +11,6 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-
 
 import collections
 
@@ -71,6 +68,7 @@ class ARecordTestCase(tests.TestCase, BackendTestMixin):
             recordset_type,
             values={
                 'id': utils.generate_uuid(),
+                'data': '172.25.1.1',
                 'to_primitive': self.create_record_primitive('172.25.1.1')
             }
         )

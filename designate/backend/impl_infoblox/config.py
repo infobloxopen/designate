@@ -1,6 +1,4 @@
-# Copyright 2014 Mirantis
-#
-# Author: Nikolay Yakovlev <nyakovlev@mirantis.com>
+# Copyright 2014 Infoblox
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -17,7 +15,6 @@
 import logging
 
 from oslo.config import cfg
-from oslo.db import options
 
 LOG = logging.getLogger(__name__)
 
@@ -41,4 +38,4 @@ OPTS = [
     cfg.StrOpt('net_view', default='default'),
 ]
 
-cfg.CONF.register_opts(OPTS + options.database_opts, group='backend:infoblox')
+cfg.CONF.register_opts(OPTS, group='backend:infoblox')
