@@ -21,8 +21,19 @@ class RRData_TXT(Record):
     Defined in: RFC1035
     """
     FIELDS = {
-        'txt-data': {}
+        'txt-data': {
+            'schema': {
+                'type': 'string',
+            },
+            'required': True
+        }
     }
+
+    def _to_string(self):
+        return self.txt_data
+
+    def _from_string(self, value):
+        self.txt_data = value
 
     # The record type is defined in the RFC. This will be used when the record
     # is sent by mini-dns.

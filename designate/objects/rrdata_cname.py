@@ -21,8 +21,21 @@ class RRData_CNAME(Record):
     Defined in: RFC1035
     """
     FIELDS = {
-        'cname': {}
+        'cname': {
+            'schema': {
+                'type': 'string',
+                'format': 'domainname',
+                'maxLength': 255,
+            },
+            'required': True
+        }
     }
+
+    def _to_string(self):
+        return self.cname
+
+    def _from_string(self, value):
+        self.cname = value
 
     # The record type is defined in the RFC. This will be used when the record
     # is sent by mini-dns.

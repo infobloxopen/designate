@@ -21,8 +21,20 @@ class RRData_AAAA(Record):
     Defined in: RFC3596
     """
     FIELDS = {
-        'address': {}
+        'address': {
+            'schema': {
+                'type': 'string',
+                'format': 'ipv6',
+            },
+            'required': True
+        }
     }
+
+    def _to_string(self):
+        return self.address
+
+    def _from_string(self, value):
+        self.address = value
 
     # The record type is defined in the RFC. This will be used when the record
     # is sent by mini-dns.

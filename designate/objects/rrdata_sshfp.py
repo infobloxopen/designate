@@ -21,10 +21,36 @@ class RRData_SSHFP(Record):
     Defined in: RFC4255
     """
     FIELDS = {
-        'algorithm': {},
-        'fp_type': {},
-        'fingerprint': {}
+        'algorithm': {
+            'schema': {
+                'type': 'integer',
+                'minimum': 0,
+                'maximum': 2
+            },
+            'required': True
+        },
+        'fp_type': {
+            'schema': {
+                'type': 'integer',
+                'minimum': 0,
+                'maximum': 1
+            },
+            'required': True
+        },
+        'fingerprint': {
+            'schema': {
+                'type': 'string',
+                'format': 'sshfp'
+            },
+            'required': True
+        }
     }
+
+    def _to_string(self):
+        return "%(algorithm)s %(fp_type)s %(fingerprint)s" % self
+
+    def _from_string(self, value):
+        self.algorithm, self.fp_type, self.fingerprint = value.split(' ')
 
     # The record type is defined in the RFC. This will be used when the record
     # is sent by mini-dns.
