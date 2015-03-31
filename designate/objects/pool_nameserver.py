@@ -12,36 +12,17 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-from designate.objects.record import Record
-from designate.objects.record import RecordList
+from designate.objects import base
 
 
-class A(Record):
-    """
-    A Resource Record Type
-    Defined in: RFC1035
-    """
+class PoolNameserver(base.DictObjectMixin, base.PersistentObjectMixin,
+                     base.DesignateObject):
     FIELDS = {
-        'address': {
-            'schema': {
-                'type': 'string',
-                'format': 'ipv4',
-            },
-            'required': True
-        }
+        'pool_id': {},
+        'host': {},
+        'port': {},
     }
 
-    def _to_string(self):
-        return self.address
 
-    def _from_string(self, value):
-        self.address = value
-
-    # The record type is defined in the RFC. This will be used when the record
-    # is sent by mini-dns.
-    RECORD_TYPE = 1
-
-
-class AList(RecordList):
-
-    LIST_ITEM_TYPE = A
+class PoolNameserverList(base.ListObjectMixin, base.DesignateObject):
+    LIST_ITEM_TYPE = PoolNameserver
